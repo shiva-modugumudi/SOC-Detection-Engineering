@@ -1,57 +1,69 @@
 # SOC Detection Engineering
 
-**SIEM use cases, detection logic, and analyst investigation workflows.**
+**Turning emerging threat research and evolving attacker tactics into actionable SOC detection use cases.**
 
-A growing portfolio that turns security scenarios into documented detections, with attention to log requirements, query logic, validation, false positives, and investigation steps.
+A threat-informed detection engineering portfolio focused on identifying recent and emerging threats, understanding attacker tactics, techniques, and procedures (TTPs), and translating that research into SIEM detection logic and analyst investigation workflows.
 
 Created by [Siva Modugumudi](https://github.com/shiva-modugumudi), a security professional with experience in SOC operations, incident response, threat hunting, and cloud security.
 
 ## Purpose
 
-Help students understand how detections work and give security teams and hiring managers a clear view of the reasoning behind each use case—from the suspicious behavior to the evidence an analyst should examine.
+Show how a published threat report becomes a practical detection: identify the attacker behavior, determine the required logs, develop a query, test its coverage, and document how an analyst should investigate the alert. Help students learn this process and let hiring managers assess the research, reasoning, and validation behind each use case.
 
-## Scope
+## Research-to-detection workflow
 
-- Authentication and identity threats
-- Endpoint execution and persistence
-- Cloud account and configuration changes
-- Network activity and potential command-and-control behavior
-- Data access and potential exfiltration
-- Detection tuning and investigation guidance
+1. Select a recent threat advisory, campaign report, or newly documented technique.
+2. Record the original source, publication date, research date, and relevant evidence.
+3. Extract observable attacker behaviors and map supported behaviors to MITRE ATT&CK.
+4. Identify telemetry requirements and write a detection hypothesis.
+5. Build platform-specific detection logic using Splunk SPL, Microsoft Sentinel KQL, or Sigma where appropriate.
+6. Test suspicious and benign activity; record results, false positives, and visibility gaps.
+7. Document investigation steps and review the detection as the threat evolves.
 
-Queries may use Splunk SPL, Microsoft Sentinel KQL, or Sigma where appropriate. Each implementation will identify its actual platform, log schema, prerequisites, and validation status.
+A newly published report may describe an established technique. Each use case will distinguish newly observed behavior from known techniques used in a recent campaign. Publication dates alone do not establish novelty.
 
-## Use case index
+## Focus areas
 
-See the [detection catalog](detections/README.md) for planned scenarios and implementation status.
+- Emerging campaigns and changes in attacker tradecraft
+- Identity compromise and authentication abuse
+- Endpoint execution, persistence, and defense evasion
+- Cloud identity abuse and control-plane activity
+- Command-and-control activity and data exfiltration
+- Detection gaps, tuning, and investigation guidance
 
-**Current status:** Repository structure and documentation guide established. Detection queries and validation evidence have not been added yet.
+Behavior-based detection is the primary focus. Indicators such as IP addresses, domains, and file hashes may support an investigation; their source, observation date, and limitations must be documented.
+
+## Use case catalog and status
+
+See the [detection catalog](detections/README.md) for research priorities and implementation status.
+
+**Current status:** Research workflow, repository structure, and documentation guide established. No specific emerging campaign has been researched in this repository yet. Detection queries and validation evidence have not been added.
 
 ## What each use case will include
 
 | Component | Details |
 | --- | --- |
-| Threat scenario | Behavior of interest and why it matters |
-| Required telemetry | Log source, event types, required fields, and collection prerequisites |
-| Detection logic | Query, correlation window, thresholds, and assumptions |
-| ATT&CK mapping | Relevant techniques with supporting rationale and references |
-| Validation | Test input, expected result, observed result, and environment |
+| Threat research | Original references, publication dates, research date, campaign context, and evidence |
+| Attacker behavior | Observed TTPs, detection hypothesis, and supported ATT&CK mappings |
+| Required telemetry | Log sources, event types, fields, collection settings, and gaps |
+| Detection logic | Platform-specific query, correlation window, thresholds, and assumptions |
+| Validation | Test inputs, expected and observed results, environment, and date |
 | False positives | Legitimate explanations and scoped tuning options |
-| Investigation | Evidence checks, enrichment, escalation criteria, and response considerations |
-| Limitations | Visibility gaps, evasion opportunities, and unsupported cases |
+| Investigation | Evidence checks, correlation, enrichment, and escalation criteria |
+| Maintenance | Coverage limitations, last review date, and changes in attacker behavior |
 
 ## Repository guide
 
 | Location | Purpose |
 | --- | --- |
-| [detections](detections/README.md) | Detection catalog and future use case folders |
-| [Use case guide](docs/use-case-guide.md) | Consistent format for developing and reviewing detections |
+| [detections](detections/README.md) | Threat research backlog and future detection use cases |
+| [Use case guide](docs/use-case-guide.md) | Research-to-detection documentation and validation template |
 
-Use descriptive folders such as `detections/password-spraying/` when an implementation begins. Keep its documentation, platform-specific queries, and sanitized validation examples together.
+When work begins, use a descriptive folder such as `detections/<threat-or-behavior>/`. Keep research notes, queries, and sanitized validation examples together. Every query must identify its platform, log schema, prerequisites, and actual test status.
 
-## Development approach
+## Quality and evidence
 
-Define the behavior and required telemetry, build the query, test expected matches and benign cases, document investigation steps, then review tuning and limitations. Mark a detection as validated only when evidence is recorded. Lab validation does not imply production readiness.
+Use original advisories, vendor research, or incident reports where available. Separate reported facts, analyst inferences, and lab observations. Mark work as lab validated only when test evidence is recorded; lab validation does not imply production readiness. Do not publish credentials, private incident data, or unsanitized logs.
 
 ## Relationship to Secure Automations
 
