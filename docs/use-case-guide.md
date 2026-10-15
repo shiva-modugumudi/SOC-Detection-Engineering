@@ -1,43 +1,47 @@
-# Detection Use Case Guide
+# Emerging Threat Research-to-Detection Guide
 
-Use this structure for each detection. Replace prompts with evidence-backed details.
+Use this template for every use case. Replace prompts with evidence-backed details.
 
-## Title and status
+## 1. Title, summary, and status
 
-State the behavior, owner, platform, and status. Distinguish planned work, unvalidated queries, lab validation, and production deployment.
+State the threat or observable behavior, detection objective, owner, platform, creation date, and last review date. Distinguish research planned, research documented, in development, lab validated, and needs review.
 
-## Threat scenario and objective
+## 2. Threat research and source provenance
 
-Explain the activity being detected, its security relevance, and what the alert can and cannot establish.
+Record the original report title, publisher, URL, publication or update date, and date reviewed. Summarize the campaign, affected environments, and observed attacker behavior. Distinguish newly documented techniques from known techniques used in recent activity. Separate source-reported facts from analyst inference; do not describe a threat as recent or emerging without dated evidence.
 
-## Telemetry and prerequisites
+## 3. Attacker behavior and detection hypothesis
 
-List log sources, collection settings, event identifiers where relevant, required fields, normalization, retention, and known gaps. Provide a sanitized sample event.
+Explain the observable sequence and why the selected telemetry could reveal it. State what an alert can and cannot establish. Prefer behavior-based logic; document the provenance, observation dates, and limitations of any supporting indicators.
 
-## Detection logic and query
+## 4. MITRE ATT&CK mapping
 
-Explain the conditions, grouping keys, correlation window, thresholds, exclusions, and baseline assumptions. Include the complete query and actual platform/schema requirements. Do not claim portability without testing.
+Record technique identifiers, names, official references, and why the source evidence supports each mapping. Do not assign techniques based only on keywords. Note uncertainty or incomplete evidence.
 
-## MITRE ATT&CK mapping
+## 5. Telemetry and prerequisites
 
-Record relevant technique identifiers, names, official references, and why the observed behavior supports the mapping. Do not add mappings based only on keywords.
+List log sources, collection settings, event identifiers where relevant, required fields, normalization, retention, and gaps. Provide sanitized sample events and identify behavior that cannot be observed with the available logs.
 
-## Validation evidence
+## 6. Detection logic and query
 
-Record the test environment and date, sample input, expected matches, observed matches, and query execution results. Include benign activity and boundary cases. State explicitly when execution has not been tested.
+Explain conditions, sequence, grouping keys, time window, thresholds, exclusions, and baseline assumptions. Include complete platform-specific queries and schema requirements. Identify whether the implementation uses Splunk SPL, Sentinel KQL, Sigma, or another format. Do not claim portability or query execution without testing.
 
-## False positives and tuning
+## 7. Validation evidence
 
-Explain legitimate scenarios and how to distinguish them. Scope exclusions narrowly and document their impact on coverage.
+Record the authorized lab environment, test date, inputs, expected matches, observed matches, and execution results. Test suspicious behavior, benign activity, and boundary cases. Use sanitized or synthetic events where appropriate and disclose that limitation. State explicitly when a query has not been executed. Lab validation does not imply production readiness.
 
-## Analyst investigation
+## 8. False positives and tuning
 
-Describe initial evidence checks, related events to correlate, identity and asset context, enrichment sources, and escalation criteria. Separate suspicious evidence from confirmed compromise.
+Explain legitimate scenarios and how to distinguish them. Scope exclusions narrowly and describe the coverage lost through tuning.
 
-## Response considerations
+## 9. Analyst investigation
 
-Describe possible next actions and required authorization. Avoid assuming every alert warrants blocking or account disablement.
+Describe initial evidence checks, related events, identity and asset context, enrichment, and escalation criteria. Separate suspicious evidence from confirmed compromise.
 
-## Limitations and maintenance
+## 10. Response considerations
 
-Document blind spots, possible evasion, data dependencies, performance considerations, and when the detection should be reviewed.
+Document proportionate containment and remediation options, evidence preservation, and required authorization.
+
+## 11. Coverage gaps and maintenance
+
+Document blind spots, possible evasion, telemetry dependencies, performance constraints, and untested assumptions. Record the last review date and review triggers, including updated source research, changed attacker behavior, schema changes, and new false positives. Maintain a short change log linking query changes to their evidence.
